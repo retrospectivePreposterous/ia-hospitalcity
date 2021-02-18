@@ -3,8 +3,8 @@
    (:objects
       i1 i2 - injured
       l1 l2 l3 l4 - location
-	  ambulance - ambulance
-	  hospital - hospital
+      ambulance - ambulance
+      hospital - hospital
    )
    (:init
       (not (full ambulance))
