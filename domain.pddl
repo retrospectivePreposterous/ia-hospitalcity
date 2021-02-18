@@ -2,12 +2,12 @@
   (:requirements :strips :typing :negative-preconditions)
   (:types injured location ambulance hospital)
   (:predicates (built ?h - hospital ?la - location)
-	            (arrived ?a - ambulance ?la - location)
+	       (arrived ?a - ambulance ?la - location)
                (at ?i - injured ?la - location)
                (in ?i - injured ?a - ambulance)
-	            (attend ?i - injured ?h - hospital)
+	       (attend ?i - injured ?h - hospital)
                (full ?a - ambulance)
-	            (link ?la - location ?lb - location))
+	       (link ?la - location ?lb - location))
   (:action pick
      :parameters (?i - injured ?a - ambulance ?la - location)
      :precondition (and (arrived ?a ?la) (at ?i ?la) (not (full ?a)) )
@@ -15,8 +15,8 @@
   )
   (:action drop
      :parameters (?i - injured ?a - ambulance ?h - hospital ?la - location)
-     :precondition (and (built ?h ?la) (arrived ?a ?la) (full ?a) )
-     :effect (and (attend ?i ?h) (not (full ?a)) )
+     :precondition (and (built ?h ?la) (arrived ?a ?la) (full ?a) (in ?i ?a))
+     :effect (and (attend ?i ?h) (not (in ?i ?a)) (not (full ?a)) )
   )
   (:action move
      :parameters (?a - ambulance ?la - location ?lb - location)
@@ -24,4 +24,3 @@
      :effect (and (arrived ?a ?lb) (not (arrived ?a ?la)) )
   )
 )
-
